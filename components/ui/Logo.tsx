@@ -1,18 +1,27 @@
+import Image from "next/image";
 import Link from "next/link";
 
 interface LogoProps {
-  /** "light" renders white marks for dark backgrounds, "dark" renders black marks. */
+  /**
+   * "light" renders a white version for dark backgrounds (header, footer,
+   * mobile menu). "dark" keeps the original black-on-ivory art for light
+   * backgrounds (the intro overlay).
+   */
   variant?: "light" | "dark";
-  /** Show the "BRIGHT & SHINE / TEETH WHITENING" wordmark beside the monogram. */
+  /** Larger size when true (full lockup contexts); compact when false. */
   showWordmark?: boolean;
   className?: string;
-  /** When true renders as a plain element (no link) — used inside the intro overlay. */
+  /** Render without a link wrapper — used inside the intro overlay. */
   asStatic?: boolean;
 }
 
 /**
- * Bright & Shine monogram, recreated as an inline SVG so it stays crisp on any
- * background. Swap `public/logo/*` and this component for the client's final art.
+ * Bright & Shine logo. The source art is a black monogram + wordmark on a light
+ * background (non-transparent JPEG), so we adapt it per background:
+ *  - light variant → invert + grayscale turns the marks white and drops the
+ *    (now near-black) backdrop into the dark site background.
+ *  - dark variant → multiply blend melts the light backdrop into the ivory page
+ *    while preserving the original black + champagne artwork.
  */
 export function Logo({
   variant = "dark",
@@ -20,67 +29,23 @@ export function Logo({
   className = "",
   asStatic = false,
 }: LogoProps) {
-  const ink = variant === "light" ? "#FFFFFF" : "#0B0B0B";
+  const isLight = variant === "light";
 
   const mark = (
-    <span className={`flex items-center gap-3 ${className}`}>
-      <svg
-        viewBox="0 0 120 120"
-        className="h-10 w-10 shrink-0"
-        role="img"
-        aria-label="Bright & Shine monogram"
-      >
-        {/* Serif "B" */}
-        <text
-          x="8"
-          y="86"
-          fontFamily="var(--font-cormorant), Georgia, serif"
-          fontSize="86"
-          fontWeight="600"
-          fill={ink}
-        >
-          B
-        </text>
-        {/* Serif "S" overlapping */}
-        <text
-          x="52"
-          y="98"
-          fontFamily="var(--font-cormorant), Georgia, serif"
-          fontSize="86"
-          fontWeight="600"
-          fill={ink}
-        >
-          S
-        </text>
-        {/* Champagne ampersand accent */}
-        <text
-          x="58"
-          y="44"
-          fontFamily="var(--font-cormorant), Georgia, serif"
-          fontSize="34"
-          fontStyle="italic"
-          fill="#B5A088"
-        >
-          &amp;
-        </text>
-      </svg>
-
-      {showWordmark && (
-        <span className="flex flex-col leading-none">
-          <span
-            className="font-serif text-lg font-semibold tracking-wide"
-            style={{ color: ink }}
-          >
-            BRIGHT &amp; SHINE
-          </span>
-          <span
-            className="font-sans text-[0.6rem] uppercase tracking-[0.35em]"
-            style={{ color: variant === "light" ? "#C9B79E" : "#8F8F8F" }}
-          >
-            Teeth Whitening
-          </span>
-        </span>
-      )}
+    <span className={`inline-flex items-center ${className}`}>
+      <Image
+        src="/images/logo-bs.jpeg"
+        alt="Bright & Shine Teeth Whitening"
+        width={1005}
+        height={927}
+        priority
+        sizes="120px"
+        className={`w-auto select-none ${showWordmark ? "h-12 lg:h-14" : "h-10"} ${
+          isLight
+            ? "[filter:invert(1)_grayscale(1)_contrast(1.05)]"
+            : "mix-blend-multiply"
+        }`}
+      />
     </span>
   );
 
