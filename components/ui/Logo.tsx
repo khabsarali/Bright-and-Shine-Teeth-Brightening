@@ -3,9 +3,9 @@ import Link from "next/link";
 
 interface LogoProps {
   /**
-   * "light" renders a white version for dark backgrounds (header, footer,
-   * mobile menu). "dark" keeps the original black-on-ivory art for light
-   * backgrounds (the intro overlay).
+   * "light" keeps the white artwork for dark backgrounds (header, footer,
+   * mobile menu). "dark" inverts it to black for light backgrounds (the
+   * intro overlay).
    */
   variant?: "light" | "dark";
   /** Larger size when true (full lockup contexts); compact when false. */
@@ -16,12 +16,13 @@ interface LogoProps {
 }
 
 /**
- * Bright & Shine logo. The source art is a black monogram + wordmark on a light
- * background (non-transparent JPEG), so we adapt it per background:
- *  - light variant → invert + grayscale turns the marks white and drops the
- *    (now near-black) backdrop into the dark site background.
- *  - dark variant → multiply blend melts the light backdrop into the ivory page
- *    while preserving the original black + champagne artwork.
+ * Bright & Shine logo — white monogram + wordmark on a black square canvas.
+ * The source has generous black padding, so we crop to the horizontal content
+ * band with a wide aspect-ratio box (object-cover trims the top/bottom black),
+ * then blend the remaining black away:
+ *  - light variant → `screen` drops the black, leaving the white logo.
+ *  - dark variant → `invert` flips it to black, `multiply` drops the (now white)
+ *    backdrop into the ivory page.
  */
 export function Logo({
   variant = "dark",
@@ -32,19 +33,19 @@ export function Logo({
   const isLight = variant === "light";
 
   const mark = (
-    <span className={`inline-flex items-center ${className}`}>
+    <span
+      className={`relative block ${showWordmark ? "h-10 lg:h-12" : "h-9"} ${
+        isLight ? "mix-blend-screen" : "[filter:invert(1)] mix-blend-multiply"
+      } ${className}`}
+      style={{ aspectRatio: "1005 / 500" }}
+    >
       <Image
-        src="/images/logo-bs.jpeg"
+        src="/images/bs-logo.png"
         alt="Bright & Shine Teeth Whitening"
-        width={1005}
-        height={927}
+        fill
         priority
-        sizes="120px"
-        className={`w-auto select-none ${showWordmark ? "h-12 lg:h-14" : "h-10"} ${
-          isLight
-            ? "[filter:invert(1)_grayscale(1)_contrast(1.05)]"
-            : "mix-blend-multiply"
-        }`}
+        sizes="160px"
+        className="select-none object-cover object-center"
       />
     </span>
   );
