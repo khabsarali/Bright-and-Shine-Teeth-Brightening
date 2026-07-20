@@ -125,3 +125,40 @@
   background: var(--color-champagne);
   opacity: 1;
 }
+
+/*
+ * Hero background — the lady sits as a full-bleed CSS background with a
+ * left-to-right black gradient blending her into the charcoal text area.
+ * Layer order: gradient (top) → client image → temporary fallback.
+ * A missing /images/hero-lady.jpg simply falls through to the fallback,
+ * so replace that file to swap in the client's uploaded lady image.
+ */
+.hero-bg {
+  background-color: var(--color-black);
+  background-image: linear-gradient(
+      90deg,
+      rgba(5, 5, 5, 0.98) 0%,
+      rgba(5, 5, 5, 0.92) 30%,
+      rgba(5, 5, 5, 0.62) 52%,
+      rgba(5, 5, 5, 0.18) 72%,
+      rgba(5, 5, 5, 0.05) 100%
+    ),
+    var(--hero-img);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    /* Stronger vertical overlay keeps text readable while the lady stays visible */
+    background-image: linear-gradient(
+        180deg,
+        rgba(5, 5, 5, 0.55) 0%,
+        rgba(5, 5, 5, 0.8) 45%,
+        rgba(5, 5, 5, 0.98) 100%
+      ),
+      var(--hero-img);
+    background-position: top right;
+  }
+}
