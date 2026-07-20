@@ -129,9 +129,8 @@
 /*
  * Hero background — the lady sits as a full-bleed CSS background with a
  * left-to-right black gradient blending her into the charcoal text area.
- * Layer order: gradient (top) → client image → temporary fallback.
- * A missing /images/hero-lady.jpg simply falls through to the fallback,
- * so replace that file to swap in the client's uploaded lady image.
+ * The image path is supplied via the --hero-img variable on the section
+ * (see HeroSection.tsx → /images/hero-lady.png).
  */
 .hero-bg {
   background-color: var(--color-black);

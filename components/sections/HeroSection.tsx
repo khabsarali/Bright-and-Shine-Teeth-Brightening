@@ -16,8 +16,7 @@ const stats = [
  * temporary Unsplash fallback — drop the real photo at
  * `public/images/hero-lady.jpg` and it takes over automatically.
  */
-const heroImageLayers =
-  "url('/images/hero-lady.jpg'), url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1400&q=85')";
+const heroImageLayers = "url('/images/hero-lady.png')";
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
