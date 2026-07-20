@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-black: #050505;
+  --color-rich: #0b0b0b;
+  --color-charcoal: #171717;
+  --color-ivory: #f8f6f2;
+  --color-cream: #f1eee8;
+  --color-soft-gray: #e6e3de;
+  --color-medium-gray: #8f8f8f;
+  --color-champagne: #b5a088;
+}
+
+@layer base {
+  * {
+    @apply border-soft-gray;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ivory text-black-pure font-sans antialiased;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+    text-wrap: balance;
+  }
+
+  /* Accessible, on-brand focus ring */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-champagne);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .container-lux {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply font-sans text-xs font-medium uppercase tracking-eyebrow text-champagne;
+  }
+
+  .eyebrow-dark {
+    @apply font-sans text-xs font-medium uppercase tracking-eyebrow text-champagne-light;
+  }
+
+  .section-pad {
+    @apply py-20 md:py-24 lg:py-28;
+  }
+
+  /* Subtle glassmorphism used on dark testimonial cards */
+  .glass-card {
+    background: linear-gradient(
+      145deg,
+      rgba(23, 23, 23, 0.7),
+      rgba(11, 11, 11, 0.55)
+    );
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(181, 160, 136, 0.18);
+  }
+
+  .hairline {
+    @apply border-champagne/25;
+  }
+
+  .btn-focus {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbars on horizontal mobile carousels */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Swiper overrides to match brand */
+.swiper-pagination-bullet {
+  background: var(--color-medium-gray);
+  opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+  background: var(--color-champagne);
+  opacity: 1;
+}
