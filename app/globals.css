@@ -184,7 +184,7 @@
  */
 .header-logo {
   display: block;
-  height: clamp(48px, 6vw, 64px);
+  height: 100px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;

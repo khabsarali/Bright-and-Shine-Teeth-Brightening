@@ -29,7 +29,7 @@ export function Header() {
             : "border-b border-transparent bg-gradient-to-b from-black-pure/45 to-transparent"
         }`}
       >
-        <div className="container-lux flex h-[74px] items-center justify-between md:h-[84px] lg:h-[92px]">
+        <div className="container-lux flex h-[116px] items-center justify-between">
           <Link
             href="/"
             aria-label="Bright and Shine Teeth Brightening — home"
