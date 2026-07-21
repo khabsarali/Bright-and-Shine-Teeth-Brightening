@@ -183,8 +183,9 @@
  * so it stays prominent without forcing a tall header. Aspect ratio, and the
  * transparent background, are preserved.
  */
-/* Header logo — the official black-on-transparent lockup, shown as-is inside
-   a white container so it stays visible over the (dark) hero header. */
+/* Header logo — transparent lockup shown directly (no background box).
+   Black on the light homepage header; whitened only over the dark interior
+   page header via the --invert modifier. */
 .header-logo {
   display: block;
   height: 56px;
@@ -193,15 +194,24 @@
   flex-shrink: 0;
 }
 
-/* Hero logo — the official black logo, sized to fill the white hero panel
-   that holds it. Aspect ratio preserved; never inverted or distorted. */
+.header-logo--invert {
+  filter: brightness(0) invert(1);
+}
+
+/* Hero logo — transparent lockup shown directly on the cream hero.
+   Aspect ratio preserved; never distorted. */
 .hero-logo {
   display: block;
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
   height: auto;
   object-fit: contain;
-  margin-inline: auto;
+}
+
+@media (max-width: 639px) {
+  .hero-logo {
+    margin-inline: auto;
+  }
 }
 
 /*

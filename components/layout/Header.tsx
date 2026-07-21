@@ -47,15 +47,14 @@ export function Header() {
             aria-label="Bright and Shine Teeth Whitening — home"
             className="btn-focus inline-flex rounded-2xl"
           >
-            {/* White container keeps the black logo readable on any header state */}
-            <span className="flex items-center rounded-2xl bg-white px-5 py-2.5 shadow-[0_12px_35px_rgba(0,0,0,0.08)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/white-logo.png"
-                alt="Bright and Shine Teeth Whitening"
-                className="header-logo"
-              />
-            </span>
+            {/* Transparent logo — black on the light homepage header, whitened
+                only over the dark interior-page header so it stays visible. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/white-logo.png"
+              alt="Bright and Shine Teeth Whitening"
+              className={`header-logo${light ? "" : " header-logo--invert"}`}
+            />
           </Link>
 
           <nav aria-label="Primary" className="hidden lg:block">

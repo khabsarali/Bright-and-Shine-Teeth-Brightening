@@ -58,19 +58,13 @@ export function HeroSection() {
           animate="show"
           className="max-w-[600px]"
         >
-          {/* Brand lockup — the official black logo on its white background,
-              held in a large white panel so it reads over the dark hero. */}
-          <motion.div
+          {/* Brand lockup — transparent logo shown directly on the cream hero. */}
+          <motion.img
             variants={logoItem}
-            className="rounded-card-lg border border-champagne/15 bg-white p-10 shadow-soft-lg sm:p-12"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/white-logo.png"
-              alt="Bright and Shine Teeth Whitening"
-              className="hero-logo"
-            />
-          </motion.div>
+            src="/images/white-logo.png"
+            alt="Bright and Shine Teeth Whitening"
+            className="hero-logo"
+          />
 
           <motion.div
             variants={item}
