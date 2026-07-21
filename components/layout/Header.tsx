@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { navLinks, contactInfo } from "@/data/navigation";
-import { Logo } from "@/components/ui/Logo";
 import { BookingButton } from "@/components/ui/BookingButton";
 import { MobileMenu } from "./MobileMenu";
 
@@ -26,12 +25,22 @@ export function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-lux ${
           scrolled
-            ? "border-b border-white/10 bg-black-pure/80 backdrop-blur-md"
-            : "border-b border-transparent bg-transparent"
+            ? "border-b border-champagne/15 bg-[rgba(8,8,8,0.94)] backdrop-blur-[14px]"
+            : "border-b border-transparent bg-gradient-to-b from-black-pure/45 to-transparent"
         }`}
       >
-        <div className="container-lux flex h-20 items-center justify-between">
-          <Logo variant="light" />
+        <div className="container-lux flex h-[74px] items-center justify-between md:h-[84px] lg:h-[92px]">
+          <Link
+            href="/"
+            aria-label="Bright and Shine Teeth Brightening — home"
+            className="btn-focus inline-flex rounded-md"
+          >
+            <img
+              src="/images/white-logo.png"
+              alt="Bright and Shine Teeth Brightening"
+              className="header-logo"
+            />
+          </Link>
 
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-8">

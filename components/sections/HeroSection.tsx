@@ -46,16 +46,7 @@ export function HeroSection() {
           animate="show"
           className="max-w-[600px]"
         >
-          {/* Brand logo — the source PNG is black on transparent and is
-              whitened via CSS (see `.hero-logo`) to read on the dark overlay. */}
-          <motion.img
-            variants={item}
-            src="/images/white-logo.png"
-            alt="Bright and Shine Teeth Brightening"
-            className="hero-logo"
-          />
-
-          <motion.p variants={item} className="eyebrow-dark mt-9">
+          <motion.p variants={item} className="eyebrow-dark">
             Professional Teeth Whitening
           </motion.p>
 
