@@ -127,37 +127,56 @@
 }
 
 /*
- * Hero background — the lady sits as a full-bleed CSS background with a
- * left-to-right black gradient blending her into the charcoal text area.
- * The image path is supplied via the --hero-img variable on the section
- * (see HeroSection.tsx → /images/hero-lady.png).
+ * Hero background — the subject in hero-bg.png sits on the right of the frame
+ * with open space on the left. A left-to-right dark gradient keeps the
+ * left-side content readable while the subject on the right stays clearly
+ * visible. The image path is supplied via --hero-img (see HeroSection.tsx →
+ * /images/hero-bg.png).
  */
 .hero-bg {
   background-color: var(--color-black);
   background-image: linear-gradient(
       90deg,
-      rgba(5, 5, 5, 0.98) 0%,
-      rgba(5, 5, 5, 0.92) 30%,
-      rgba(5, 5, 5, 0.62) 52%,
-      rgba(5, 5, 5, 0.18) 72%,
-      rgba(5, 5, 5, 0.05) 100%
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.55) 42%,
+      rgba(0, 0, 0, 0.12) 75%,
+      rgba(0, 0, 0, 0.05) 100%
     ),
     var(--hero-img);
   background-size: cover;
   background-repeat: no-repeat;
+  /* Keep the subject (right side of the frame) in view on desktop */
   background-position: center right;
 }
 
+/* Tablet — pull the frame slightly so the subject isn't cropped */
+@media (max-width: 1024px) {
+  .hero-bg {
+    background-position: 72% center;
+  }
+}
+
+/* Mobile — subject stays visible up top, stronger overlay for readability */
 @media (max-width: 768px) {
   .hero-bg {
-    /* Stronger vertical overlay keeps text readable while the lady stays visible */
     background-image: linear-gradient(
         180deg,
-        rgba(5, 5, 5, 0.55) 0%,
-        rgba(5, 5, 5, 0.8) 45%,
-        rgba(5, 5, 5, 0.98) 100%
+        rgba(0, 0, 0, 0.62) 0%,
+        rgba(0, 0, 0, 0.72) 48%,
+        rgba(0, 0, 0, 0.9) 100%
       ),
       var(--hero-img);
-    background-position: top right;
+    background-position: 68% top;
   }
+}
+
+/*
+ * Hero logo — the source PNG is black artwork on a transparent background;
+ * this filter renders it pure white so it reads on the dark overlay. The
+ * asset itself is untouched (aspect ratio and transparency preserved).
+ */
+.hero-logo {
+  width: clamp(140px, 14vw, 190px);
+  height: auto;
+  filter: brightness(0) invert(1);
 }

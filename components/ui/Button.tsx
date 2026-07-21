@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type Variant = "primary" | "outline" | "outline-dark" | "ghost";
+type Variant = "primary" | "accent" | "outline" | "outline-dark" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
@@ -11,6 +11,9 @@ const variants: Record<Variant, string> = {
   // White pill on dark / black pill on light — matches reference CTAs
   primary:
     "bg-white text-black-pure hover:bg-champagne hover:text-white shadow-soft",
+  // Brand-champagne filled CTA — used for the primary hero action
+  accent:
+    "bg-champagne text-white hover:bg-champagne-light hover:text-white shadow-soft hover:shadow-soft-lg",
   // Outlined button used on dark hero
   outline:
     "border border-white/40 text-white hover:border-champagne hover:text-champagne-light",

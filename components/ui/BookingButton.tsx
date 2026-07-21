@@ -6,7 +6,7 @@ import { useBooking } from "./BookingProvider";
 
 interface BookingButtonProps {
   children: ReactNode;
-  variant?: "primary" | "outline" | "outline-dark" | "ghost";
+  variant?: "primary" | "accent" | "outline" | "outline-dark" | "ghost";
   size?: "sm" | "md" | "lg";
   className?: string;
   treatment?: string;

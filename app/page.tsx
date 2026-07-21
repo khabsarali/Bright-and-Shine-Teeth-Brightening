@@ -4,6 +4,7 @@ import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { TreatmentsSection } from "@/components/sections/TreatmentsSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { VideoReviewsSection } from "@/components/sections/VideoReviewsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <ProcessSection />
       <TreatmentsSection />
       <TestimonialsSection />
+      <VideoReviewsSection />
       <FAQSection />
       <FinalCTA />
     </>
