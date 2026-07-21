@@ -1,61 +1,65 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Logo } from "@/components/ui/Logo";
 
 /**
- * Opening flourish: the Bright & Shine logo "pops" in on first load, then the
- * overlay lifts to reveal the hero. Shows once per session and is skipped
- * entirely when the user prefers reduced motion.
+ * Full-screen preloader: the white brand logo, centered on a dark background,
+ * fades + scales in while initial assets load, then fades out and unmounts.
+ * Mounted once in the root layout, so it does not reappear on internal
+ * navigation. Respects prefers-reduced-motion via globals.css.
  */
 export function LogoIntro() {
-  const reduceMotion = useReducedMotion();
-  const [visible, setVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [gone, setGone] = useState(false);
 
   useEffect(() => {
-    if (reduceMotion) return;
-    if (sessionStorage.getItem("bs-intro-seen")) return;
-    setVisible(true);
-    document.body.style.overflow = "hidden";
-    const timer = setTimeout(() => {
-      setVisible(false);
-      sessionStorage.setItem("bs-intro-seen", "1");
-      document.body.style.overflow = "";
-    }, 2200);
+    const startedAt = Date.now();
+    const minimumDuration = 900; // avoid a flash on fast connections
+    const maxDuration = 1500; // never hold longer than ~1.5s
+
+    const hide = () => {
+      const elapsed = Date.now() - startedAt;
+      const remaining = Math.max(minimumDuration - elapsed, 0);
+      window.setTimeout(() => setIsLoading(false), remaining);
+    };
+
+    if (document.readyState === "complete") {
+      hide();
+    } else {
+      window.addEventListener("load", hide, { once: true });
+    }
+    const cap = window.setTimeout(() => setIsLoading(false), maxDuration);
+
     return () => {
-      clearTimeout(timer);
+      window.removeEventListener("load", hide);
+      window.clearTimeout(cap);
+    };
+  }, []);
+
+  // Lock scrolling only while the preloader is active.
+  useEffect(() => {
+    document.body.style.overflow = isLoading ? "hidden" : "";
+    return () => {
       document.body.style.overflow = "";
     };
-  }, [reduceMotion]);
+  }, [isLoading]);
+
+  if (gone) return null;
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-ivory"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }}
-          aria-hidden="true"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 1,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <motion.div
-              initial={{ y: 0 }}
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 1.6, ease: "easeInOut", times: [0, 0.5, 1] }}
-            >
-              <Logo variant="dark" showWordmark className="scale-125" asStatic />
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      className={`site-preloader${isLoading ? "" : " is-hidden"}`}
+      aria-hidden="true"
+      onTransitionEnd={() => {
+        if (!isLoading) setGone(true);
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/white-logo.png"
+        alt="Bright and Shine Teeth Whitening"
+        className="preloader-logo"
+      />
+    </div>
   );
 }

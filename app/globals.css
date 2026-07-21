@@ -215,6 +215,81 @@
 }
 
 /*
+ * Site preloader — full-screen dark overlay with the centered brand logo.
+ * The source PNG is black on transparent, whitened via CSS so it reads on the
+ * black background, with a very subtle glow. Fades out and is removed once the
+ * page is ready (see LogoIntro.tsx).
+ */
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6vw;
+  background: #000;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+}
+
+.site-preloader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-logo {
+  width: clamp(280px, 50vw, 720px);
+  max-width: 100%;
+  max-height: 70vh;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.88);
+  animation: logoReveal 0.8s ease-out forwards;
+  filter: brightness(0) invert(1)
+    drop-shadow(0 0 24px rgba(255, 255, 255, 0.12));
+}
+
+@keyframes logoReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1024px) {
+  .preloader-logo {
+    width: 60vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .preloader-logo {
+    width: 80vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader-logo {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .site-preloader {
+    transition-duration: 0.01ms;
+  }
+}
+
+/*
  * "Why Choose Us" — a premium near-black block that overlaps the bottom of
  * the hero. The 1px grid gap reveals the container's background as hairline
  * dividers between items; that background is the solid equivalent of the
