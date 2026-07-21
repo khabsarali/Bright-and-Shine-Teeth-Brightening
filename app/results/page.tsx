@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { BeforeAfterGallery } from "@/components/ui/BeforeAfterGallery";
+import { BeforeAfterCarousel } from "@/components/ui/BeforeAfterCarousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
@@ -22,7 +22,7 @@ export default function ResultsPage() {
       <section className="bg-white section-pad">
         <div className="container-lux">
           <Reveal>
-            <BeforeAfterGallery />
+            <BeforeAfterCarousel />
           </Reveal>
         </div>
       </section>

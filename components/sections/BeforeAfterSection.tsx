@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
-import { BeforeAfterGallery } from "@/components/ui/BeforeAfterGallery";
+import { BeforeAfterCarousel } from "@/components/ui/BeforeAfterCarousel";
 import { BookingButton } from "@/components/ui/BookingButton";
 
 export function BeforeAfterSection() {
@@ -18,7 +18,7 @@ export function BeforeAfterSection() {
         </Reveal>
 
         <Reveal delay={0.08} className="mt-14">
-          <BeforeAfterGallery />
+          <BeforeAfterCarousel />
         </Reveal>
 
         <Reveal delay={0.12} className="mt-12 text-center">
