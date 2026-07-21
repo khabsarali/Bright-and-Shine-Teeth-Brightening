@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
-import { ContactSupportCard } from "@/components/ui/ContactSupportCard";
+import { FaqLogoCard } from "@/components/ui/FaqLogoCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { faqs } from "@/data/faqs";
@@ -27,7 +27,7 @@ export default function FaqPage() {
             <FAQAccordion faqs={faqs} />
           </Reveal>
           <Reveal delay={0.1}>
-            <ContactSupportCard />
+            <FaqLogoCard />
           </Reveal>
         </div>
       </section>

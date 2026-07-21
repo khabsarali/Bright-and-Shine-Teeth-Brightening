@@ -192,6 +192,29 @@
 }
 
 /*
+ * Hero logo — large brand lockup on the left of the hero. The source PNG is
+ * black artwork on a transparent background, whitened via CSS to read on the
+ * dark side of the hero overlay. Sized to fill roughly half the left area
+ * while staying fully visible (object-contain, aspect ratio preserved).
+ */
+.hero-logo {
+  display: block;
+  width: clamp(240px, 38vw, 460px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+  .hero-logo {
+    width: clamp(200px, 62vw, 320px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/*
  * "Why Choose Us" — a premium near-black block that overlaps the bottom of
  * the hero. The 1px grid gap reveals the container's background as hairline
  * dividers between items; that background is the solid equivalent of the

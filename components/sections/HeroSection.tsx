@@ -34,6 +34,18 @@ export function HeroSection() {
         },
       };
 
+  // Subtle fade + scale-in for the brand logo.
+  const logoItem = reduceMotion
+    ? { hidden: {}, show: {} }
+    : {
+        hidden: { opacity: 0, scale: 0.92 },
+        show: {
+          opacity: 1,
+          scale: 1,
+          transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+        },
+      };
+
   return (
     <section
       className="hero-bg relative flex min-h-[750px] items-center overflow-hidden md:min-h-[90vh]"
@@ -46,31 +58,18 @@ export function HeroSection() {
           animate="show"
           className="max-w-[600px]"
         >
-          <motion.p variants={item} className="eyebrow-dark">
-            Professional Teeth Whitening
-          </motion.p>
-
-          <motion.h1
-            variants={item}
-            className="mt-5 font-serif font-medium leading-[1.04] text-white"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 4.75rem)" }}
-          >
-            A Brighter Smile
-            <br />
-            Starts Here
-          </motion.h1>
-
-          <motion.p
-            variants={item}
-            className="mt-6 max-w-[520px] text-base leading-relaxed text-white/80 md:text-[1.0625rem]"
-          >
-            Experience professional teeth-brightening treatments designed to
-            give you a visibly whiter and more confident smile.
-          </motion.p>
+          {/* Brand lockup — source PNG is black on transparent, whitened via
+              CSS (see `.hero-logo`) to read on the dark hero overlay. */}
+          <motion.img
+            variants={logoItem}
+            src="/images/white-logo.png"
+            alt="Bright and Shine Teeth Whitening"
+            className="hero-logo"
+          />
 
           <motion.div
             variants={item}
-            className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
+            className="mt-10 flex flex-col gap-4 max-sm:items-center sm:flex-row sm:flex-wrap sm:items-center"
           >
             <BookingButton variant="accent" size="lg">
               Book Your Appointment
