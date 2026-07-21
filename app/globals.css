@@ -182,43 +182,31 @@
  * so it stays prominent without forcing a tall header. Aspect ratio, and the
  * transparent background, are preserved.
  */
+/* Header logo — the official black-on-transparent lockup, shown as-is inside
+   a white container so it stays visible over the (dark) hero header. */
 .header-logo {
   display: block;
-  height: 100px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
-  filter: brightness(0) invert(1);
 }
 
-/*
- * Hero logo — large brand lockup on the left of the hero. The source PNG is
- * black artwork on a transparent background, whitened via CSS to read on the
- * dark side of the hero overlay. Sized to fill roughly half the left area
- * while staying fully visible (object-contain, aspect ratio preserved).
- */
+/* Hero logo — the official black logo, sized to fill the white hero panel
+   that holds it. Aspect ratio preserved; never inverted or distorted. */
 .hero-logo {
   display: block;
-  width: clamp(240px, 38vw, 460px);
-  max-width: 100%;
+  width: 100%;
+  max-width: 360px;
   height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
-}
-
-@media (max-width: 768px) {
-  .hero-logo {
-    width: clamp(200px, 62vw, 320px);
-    margin-left: auto;
-    margin-right: auto;
-  }
+  margin-inline: auto;
 }
 
 /*
- * Site preloader — full-screen dark overlay with the centered brand logo.
- * The source PNG is black on transparent, whitened via CSS so it reads on the
- * black background, with a very subtle glow. Fades out and is removed once the
- * page is ready (see LogoIntro.tsx).
+ * Site preloader — full-screen white overlay with the centered official black
+ * logo (shown as-is, never inverted or recoloured). Fades out and is removed
+ * once the page is ready (see LogoIntro.tsx).
  */
 .site-preloader {
   position: fixed;
@@ -228,7 +216,7 @@
   align-items: center;
   justify-content: center;
   padding: 6vw;
-  background: #000;
+  background: #ffffff;
   opacity: 1;
   visibility: visible;
   transition:
@@ -249,10 +237,8 @@
   height: auto;
   object-fit: contain;
   opacity: 0;
-  transform: scale(0.88);
+  transform: scale(0.9);
   animation: logoReveal 0.8s ease-out forwards;
-  filter: brightness(0) invert(1)
-    drop-shadow(0 0 24px rgba(255, 255, 255, 0.12));
 }
 
 @keyframes logoReveal {

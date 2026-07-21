@@ -10,7 +10,6 @@ import {
   Clock,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { Logo } from "@/components/ui/Logo";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
 import { BookingButton } from "@/components/ui/BookingButton";
 import { navLinks } from "@/data/navigation";
@@ -39,7 +38,21 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <Logo variant="light" />
+            <Link
+              href="/"
+              aria-label="Bright and Shine Teeth Whitening — home"
+              className="btn-focus inline-flex rounded-2xl"
+            >
+              {/* White card keeps the black logo readable on the dark footer */}
+              <span className="inline-flex items-center rounded-2xl bg-white px-5 py-3 shadow-soft">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/white-logo.png"
+                  alt="Bright and Shine Teeth Whitening"
+                  className="h-14 w-auto object-contain"
+                />
+              </span>
+            </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/55">
               Professional teeth whitening for a brighter, more confident smile
               — across Edmonton.

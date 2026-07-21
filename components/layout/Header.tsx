@@ -30,17 +30,21 @@ export function Header() {
             : "border-b border-transparent bg-gradient-to-b from-black-pure/45 to-transparent"
         }`}
       >
-        <div className="container-lux flex h-[116px] items-center justify-between">
+        <div className="container-lux flex h-24 items-center justify-between">
           <Link
             href="/"
-            aria-label="Bright and Shine Teeth Brightening — home"
-            className="btn-focus inline-flex rounded-md"
+            aria-label="Bright and Shine Teeth Whitening — home"
+            className="btn-focus inline-flex rounded-2xl"
           >
-            <img
-              src="/images/white-logo.png"
-              alt="Bright and Shine Teeth Brightening"
-              className="header-logo"
-            />
+            {/* White container keeps the black logo readable over the dark hero */}
+            <span className="flex items-center rounded-2xl bg-white px-5 py-2.5 shadow-[0_12px_35px_rgba(0,0,0,0.08)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/white-logo.png"
+                alt="Bright and Shine Teeth Whitening"
+                className="header-logo"
+              />
+            </span>
           </Link>
 
           <nav aria-label="Primary" className="hidden lg:block">

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { navLinks } from "@/data/navigation";
 import { business, isProvided, phoneHref } from "@/data/business";
-import { Logo } from "@/components/ui/Logo";
 import { BookingButton } from "@/components/ui/BookingButton";
 
 interface MobileMenuProps {
@@ -48,7 +47,15 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             className="absolute right-0 top-0 flex h-full w-[82%] max-w-sm flex-col bg-black-rich px-7 py-6"
           >
             <div className="flex items-center justify-between">
-              <Logo variant="light" showWordmark={false} />
+              {/* White card keeps the black logo readable on the dark menu */}
+              <span className="inline-flex items-center rounded-xl bg-white px-3.5 py-2 shadow-soft">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/white-logo.png"
+                  alt="Bright and Shine Teeth Whitening"
+                  className="h-9 w-auto object-contain"
+                />
+              </span>
               <button
                 type="button"
                 onClick={onClose}
