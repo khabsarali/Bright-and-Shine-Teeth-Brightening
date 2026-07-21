@@ -79,7 +79,7 @@ export function HeroSection() {
             <BookingButton variant="accent" size="lg">
               Book Your Appointment
             </BookingButton>
-            <Button href="/treatments" variant="outline" size="lg">
+            <Button href="/treatments" variant="outline-dark" size="lg">
               Explore Treatments
             </Button>
           </motion.div>
