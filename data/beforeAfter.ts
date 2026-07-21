@@ -1,38 +1,37 @@
 export interface BeforeAfter {
-  /** Public path (spaces URL-encoded) to a combined before/after image. */
+  /** Public path (folder space URL-encoded) to a combined before/after image. */
   src: string;
   alt: string;
 }
 
 /**
  * Real client before/after results. Each file is a single combined image with
- * the "before" smile on top and the "after" smile below. Filenames live in
- * `public/Teeths after/` and are kept verbatim (note the "befor" spelling and
- * the spaces, which are URL-encoded here).
+ * the "before" smile on top and the brighter "after" smile below. Files live
+ * in `public/Teeths after/` (the folder space is URL-encoded here).
  */
 export const beforeAfterResults: BeforeAfter[] = [
   {
-    src: "/Teeths%20after/before%20and%20after%201.webp",
+    src: "/Teeths%20after/after1.jpeg",
     alt: "Client teeth before whitening (top) and noticeably brighter after treatment (bottom)",
   },
   {
-    src: "/Teeths%20after/befor%20and%20after%202.jpg",
-    alt: "Close-up of teeth before whitening (top) and brighter after treatment (bottom)",
+    src: "/Teeths%20after/after2.jpeg",
+    alt: "Close-up of teeth before whitening (top) and whiter after treatment (bottom)",
   },
   {
-    src: "/Teeths%20after/before%20and%20after%203.jpg",
-    alt: "Client smile before whitening (top) and after a brighter result (bottom)",
+    src: "/Teeths%20after/after3.jpeg",
+    alt: "Client smile before whitening (top) and a brighter result after treatment (bottom)",
   },
   {
-    src: "/Teeths%20after/before%20and%20after%204.jpg",
-    alt: "Teeth shade before whitening (top) and lighter shade after treatment (bottom)",
+    src: "/Teeths%20after/after4.jpeg",
+    alt: "Teeth shade before whitening (top) and a lighter shade after treatment (bottom)",
   },
   {
-    src: "/Teeths%20after/before%20and%20after%205.jpg",
+    src: "/Teeths%20after/after5.jpeg",
     alt: "Client teeth before whitening (top) and whiter after treatment (bottom)",
   },
   {
-    src: "/Teeths%20after/before%20and%20after%206.jpg",
-    alt: "Smile before whitening (top) and brighter, whiter smile after treatment (bottom)",
+    src: "/Teeths%20after/after6.jpeg",
+    alt: "Smile before whitening (top) and a brighter, whiter smile after treatment (bottom)",
   },
 ];
