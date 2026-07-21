@@ -16,14 +16,10 @@ export function TreatmentCard({ treatment }: { treatment: Treatment }) {
         {treatment.description}
       </p>
 
-      <p className="mt-6 font-serif text-3xl font-medium text-black-pure">
-        {treatment.price}
-      </p>
-
       <BookingButton
         treatment={treatment.name}
         size="sm"
-        className="mt-5 w-full"
+        className="mt-6 w-full"
       >
         Book Now
       </BookingButton>

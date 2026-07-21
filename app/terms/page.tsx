@@ -18,9 +18,8 @@ export default function TermsPage() {
             the terms outlined here.
           </p>
           <p>
-            Appointments are subject to availability and confirmation. Pricing is
-            subject to change. Please review your treatment plan with our
-            specialists prior to your visit.
+            Appointments are subject to availability and confirmation. Please
+            review your treatment plan with our specialists prior to your visit.
           </p>
           <p>
             For questions about these terms, please contact us using the details

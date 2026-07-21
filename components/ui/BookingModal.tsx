@@ -150,7 +150,7 @@ export function BookingModal() {
                     >
                       {treatments.map((t) => (
                         <option key={t.slug} value={t.name}>
-                          {t.name} — {t.price}
+                          {t.name}
                         </option>
                       ))}
                     </select>

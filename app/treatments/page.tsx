@@ -37,14 +37,9 @@ export default function TreatmentsPage() {
               as="article"
               className="rounded-card border border-soft-gray bg-white p-8 shadow-soft"
             >
-              <div className="flex items-center justify-between">
-                <h2 className="font-serif text-2xl font-medium text-black-pure">
-                  {treatment.name}
-                </h2>
-                <span className="font-serif text-2xl font-medium text-champagne">
-                  {treatment.price}
-                </span>
-              </div>
+              <h2 className="font-serif text-2xl font-medium text-black-pure">
+                {treatment.name}
+              </h2>
               <p className="mt-3 text-sm leading-relaxed text-medium-gray">
                 {treatment.detail}
               </p>
