@@ -10,6 +10,8 @@ interface BookingButtonProps {
   size?: "sm" | "md" | "lg";
   className?: string;
   treatment?: string;
+  /** Preselect a location in the booking flow (by location id). */
+  locationId?: string;
 }
 
 /** Opens the global booking modal instead of navigating. */
@@ -19,6 +21,7 @@ export function BookingButton({
   size = "md",
   className = "",
   treatment,
+  locationId,
 }: BookingButtonProps) {
   const { openBooking } = useBooking();
   return (
@@ -26,7 +29,7 @@ export function BookingButton({
       variant={variant}
       size={size}
       className={className}
-      onClick={() => openBooking(treatment)}
+      onClick={() => openBooking({ treatment, locationId })}
     >
       {children}
     </Button>

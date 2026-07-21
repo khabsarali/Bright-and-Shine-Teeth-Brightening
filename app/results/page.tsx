@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { BeforeAfterCard } from "@/components/ui/BeforeAfterSlider";
+import { BeforeAfterGallery } from "@/components/ui/BeforeAfterGallery";
 import { Reveal } from "@/components/ui/Reveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { results } from "@/data/results";
 
 export const metadata: Metadata = {
   title: "Results",
   description:
-    "See real before-and-after transformations from Bright & Shine patients. Drag each slider to reveal the difference.",
+    "See real before-and-after transformations from Bright & Shine clients. Tap any image to view it full size.",
 };
 
 export default function ResultsPage() {
@@ -16,17 +15,15 @@ export default function ResultsPage() {
     <>
       <PageHero
         eyebrow="Real Results"
-        title="See the Difference"
-        description="Drag each slider to reveal the dramatic, long-lasting results our treatments deliver."
+        title="Before & After"
+        description="Real client results from our professional whitening treatments. Tap any image to view it full size."
       />
 
       <section className="bg-white section-pad">
-        <div className="container-lux grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[...results, ...results].map((result, i) => (
-            <Reveal key={`${result.name}-${i}`} delay={(i % 3) * 0.06}>
-              <BeforeAfterCard result={result} />
-            </Reveal>
-          ))}
+        <div className="container-lux">
+          <Reveal>
+            <BeforeAfterGallery />
+          </Reveal>
         </div>
       </section>
 

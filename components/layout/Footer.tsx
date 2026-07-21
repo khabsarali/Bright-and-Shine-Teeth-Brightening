@@ -1,47 +1,80 @@
 import Link from "next/link";
-import { Instagram, Facebook, Music2, Chrome, Phone, Mail, MapPin, Clock } from "lucide-react";
+import {
+  Instagram,
+  Facebook,
+  Music2,
+  Chrome,
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
-import { navLinks, contactInfo } from "@/data/navigation";
-import { treatments } from "@/data/treatments";
+import { BookingButton } from "@/components/ui/BookingButton";
+import { navLinks } from "@/data/navigation";
+import { locations } from "@/data/locations";
+import { business, isProvided, phoneHref, emailHref } from "@/data/business";
 
-const socials = [
-  { label: "Instagram", href: "#", icon: Instagram },
-  { label: "Facebook", href: "#", icon: Facebook },
-  { label: "TikTok", href: "#", icon: Music2 },
-  { label: "Google", href: "#", icon: Chrome },
-];
+const socialIcons: Record<string, LucideIcon> = {
+  instagram: Instagram,
+  facebook: Facebook,
+  tiktok: Music2,
+  google: Chrome,
+};
 
 export function Footer() {
+  const socials = Object.entries(business.socials).filter(([, href]) =>
+    isProvided(href),
+  );
+  const hasContact =
+    isProvided(business.phone) ||
+    isProvided(business.email) ||
+    isProvided(business.businessHours);
+
   return (
     <footer className="bg-black-pure text-white/70">
       <div className="container-lux py-16 lg:py-20">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div>
             <Logo variant="light" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/55">
-              Luxury whitening treatments for a brighter, more confident you.
+              Professional teeth whitening for a brighter, more confident smile
+              — across Edmonton.
             </p>
-            <ul className="mt-6 flex items-center gap-3">
-              {socials.map(({ label, href, icon: Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    aria-label={label}
-                    className="btn-focus flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-champagne hover:text-champagne-light"
-                  >
-                    <Icon size={16} aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
+
+            {socials.length > 0 && (
+              <ul className="mt-6 flex items-center gap-3">
+                {socials.map(([key, href]) => {
+                  const Icon = socialIcons[key] ?? Chrome;
+                  return (
+                    <li key={key}>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={key}
+                        className="btn-focus flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-champagne hover:text-champagne-light"
+                      >
+                        <Icon size={16} aria-hidden="true" />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            <BookingButton className="mt-7" size="sm">
+              Book Appointment
+            </BookingButton>
           </div>
 
           {/* Quick links */}
           <nav aria-label="Quick links">
             <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              Quick Links
+              Explore
             </h2>
             <ul className="mt-5 flex flex-col gap-3 text-sm">
               {navLinks
@@ -56,68 +89,85 @@ export function Footer() {
                     </Link>
                   </li>
                 ))}
-            </ul>
-          </nav>
-
-          {/* Treatments */}
-          <nav aria-label="Treatments">
-            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              Treatments
-            </h2>
-            <ul className="mt-5 flex flex-col gap-3 text-sm">
-              {treatments.map((t) => (
-                <li key={t.slug}>
-                  <Link
-                    href="/treatments"
-                    className="btn-focus rounded transition-colors hover:text-champagne-light"
-                  >
-                    {t.name}
-                  </Link>
-                </li>
-              ))}
               <li>
                 <Link
-                  href="/treatments"
+                  href="/#faq"
                   className="btn-focus rounded transition-colors hover:text-champagne-light"
                 >
-                  Gift Cards
+                  FAQ
                 </Link>
               </li>
             </ul>
           </nav>
 
-          {/* Contact */}
-          <div>
+          {/* Locations */}
+          <nav aria-label="Locations">
             <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              Contact
+              Locations
             </h2>
-            <ul className="mt-5 flex flex-col gap-3.5 text-sm">
-              <li className="flex items-start gap-3">
-                <Phone size={16} className="mt-0.5 shrink-0 text-champagne" aria-hidden="true" />
-                <a href={contactInfo.phoneHref} className="btn-focus rounded hover:text-champagne-light">
-                  {contactInfo.phone}
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail size={16} className="mt-0.5 shrink-0 text-champagne" aria-hidden="true" />
-                <a href={`mailto:${contactInfo.email}`} className="btn-focus rounded hover:text-champagne-light">
-                  {contactInfo.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin size={16} className="mt-0.5 shrink-0 text-champagne" aria-hidden="true" />
-                <span>{contactInfo.address}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock size={16} className="mt-0.5 shrink-0 text-champagne" aria-hidden="true" />
-                <span>{contactInfo.hours}</span>
-              </li>
+            <ul className="mt-5 flex flex-col gap-4 text-sm">
+              {locations.map((loc) => (
+                <li key={loc.id}>
+                  <a
+                    href={loc.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-focus group flex items-start gap-2.5 rounded"
+                  >
+                    <MapPin
+                      size={15}
+                      className="mt-0.5 shrink-0 text-champagne"
+                      aria-hidden="true"
+                    />
+                    <span>
+                      <span className="block font-medium text-white/85 group-hover:text-champagne-light">
+                        {loc.name}
+                      </span>
+                      <span className="block text-xs leading-relaxed text-white/50">
+                        {loc.address}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Newsletter */}
+          {/* Contact + newsletter */}
           <div>
-            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-white">
+            {hasContact && (
+              <>
+                <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-white">
+                  Contact
+                </h2>
+                <ul className="mt-5 flex flex-col gap-3.5 text-sm">
+                  {isProvided(business.phone) && (
+                    <li className="flex items-start gap-3">
+                      <Phone size={16} className="mt-0.5 shrink-0 text-champagne" aria-hidden="true" />
+                      <a href={phoneHref()} className="btn-focus rounded hover:text-champagne-light">
+                        {business.phone}
+                      </a>
+                    </li>
+                  )}
+                  {isProvided(business.email) && (
+                    <li className="flex items-start gap-3">
+                      <Mail size={16} className="mt-0.5 shrink-0 text-champagne" aria-hidden="true" />
+                      <a href={emailHref()} className="btn-focus rounded hover:text-champagne-light">
+                        {business.email}
+                      </a>
+                    </li>
+                  )}
+                  {isProvided(business.businessHours) && (
+                    <li className="flex items-start gap-3">
+                      <Clock size={16} className="mt-0.5 shrink-0 text-champagne" aria-hidden="true" />
+                      <span>{business.businessHours}</span>
+                    </li>
+                  )}
+                </ul>
+              </>
+            )}
+
+            <h2 className={`font-sans text-xs font-semibold uppercase tracking-[0.2em] text-white ${hasContact ? "mt-8" : ""}`}>
               Newsletter
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-white/55">
@@ -139,7 +189,7 @@ export function Footer() {
               Privacy Policy
             </Link>
             <Link href="/terms" className="btn-focus rounded hover:text-champagne-light">
-              Terms of Service
+              Terms &amp; Conditions
             </Link>
           </div>
         </div>

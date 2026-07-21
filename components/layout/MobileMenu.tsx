@@ -4,7 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
-import { navLinks, contactInfo } from "@/data/navigation";
+import { navLinks } from "@/data/navigation";
+import { business, isProvided, phoneHref } from "@/data/business";
 import { Logo } from "@/components/ui/Logo";
 import { BookingButton } from "@/components/ui/BookingButton";
 
@@ -73,12 +74,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             </ul>
 
             <div className="mt-auto border-t border-white/10 pt-6">
-              <a
-                href={contactInfo.phoneHref}
-                className="btn-focus block font-sans text-sm text-white/70"
-              >
-                {contactInfo.phone}
-              </a>
+              {isProvided(business.phone) && (
+                <a
+                  href={phoneHref()}
+                  className="btn-focus block font-sans text-sm text-white/70"
+                >
+                  {business.phone}
+                </a>
+              )}
               <BookingButton className="mt-4 w-full" size="lg">
                 Book Appointment
               </BookingButton>

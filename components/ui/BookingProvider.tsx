@@ -9,11 +9,17 @@ import {
   type ReactNode,
 } from "react";
 
+interface OpenBookingOptions {
+  treatment?: string;
+  locationId?: string;
+}
+
 interface BookingContextValue {
   isOpen: boolean;
-  openBooking: (treatment?: string) => void;
+  openBooking: (options?: OpenBookingOptions) => void;
   closeBooking: () => void;
   selectedTreatment?: string;
+  selectedLocationId?: string;
 }
 
 const BookingContext = createContext<BookingContextValue | null>(null);
@@ -21,17 +27,25 @@ const BookingContext = createContext<BookingContextValue | null>(null);
 export function BookingProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState<string>();
+  const [selectedLocationId, setSelectedLocationId] = useState<string>();
 
-  const openBooking = useCallback((treatment?: string) => {
-    setSelectedTreatment(treatment);
+  const openBooking = useCallback((options?: OpenBookingOptions) => {
+    setSelectedTreatment(options?.treatment);
+    setSelectedLocationId(options?.locationId);
     setIsOpen(true);
   }, []);
 
   const closeBooking = useCallback(() => setIsOpen(false), []);
 
   const value = useMemo(
-    () => ({ isOpen, openBooking, closeBooking, selectedTreatment }),
-    [isOpen, openBooking, closeBooking, selectedTreatment],
+    () => ({
+      isOpen,
+      openBooking,
+      closeBooking,
+      selectedTreatment,
+      selectedLocationId,
+    }),
+    [isOpen, openBooking, closeBooking, selectedTreatment, selectedLocationId],
   );
 
   return (

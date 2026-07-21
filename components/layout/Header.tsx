@@ -4,7 +4,8 @@ import { Menu, Phone } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { navLinks, contactInfo } from "@/data/navigation";
+import { navLinks } from "@/data/navigation";
+import { business, isProvided, phoneHref } from "@/data/business";
 import { BookingButton } from "@/components/ui/BookingButton";
 import { MobileMenu } from "./MobileMenu";
 
@@ -66,15 +67,17 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a
-              href={contactInfo.phoneHref}
-              className="btn-focus hidden items-center gap-2 rounded-full text-sm text-white/85 transition-colors hover:text-champagne-light xl:flex"
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25">
-                <Phone size={15} aria-hidden="true" />
-              </span>
-              {contactInfo.phone}
-            </a>
+            {isProvided(business.phone) && (
+              <a
+                href={phoneHref()}
+                className="btn-focus hidden items-center gap-2 rounded-full text-sm text-white/85 transition-colors hover:text-champagne-light xl:flex"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25">
+                  <Phone size={15} aria-hidden="true" />
+                </span>
+                {business.phone}
+              </a>
+            )}
 
             <div className="hidden sm:block">
               <BookingButton size="sm">Book Appointment</BookingButton>

@@ -43,6 +43,9 @@ type ButtonAsButton = CommonProps &
 
 type ButtonAsLink = CommonProps & {
   href: string;
+  /** Anchor attributes forwarded to the underlying link (e.g. external maps). */
+  target?: string;
+  rel?: string;
 };
 
 export function Button(props: ButtonAsButton | ButtonAsLink) {
@@ -57,7 +60,12 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
 
   if ("href" in props && props.href) {
     return (
-      <Link href={props.href} className={classes}>
+      <Link
+        href={props.href}
+        className={classes}
+        target={props.target}
+        rel={props.rel}
+      >
         {children}
       </Link>
     );
