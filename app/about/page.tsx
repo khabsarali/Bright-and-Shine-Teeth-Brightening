@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Sparkles, ShieldCheck, UserRound, MapPin, Star, Check } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
-import { FaqLogoCard } from "@/components/ui/FaqLogoCard";
 import { BookingButton } from "@/components/ui/BookingButton";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -88,7 +87,18 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.1} className="lg:sticky lg:top-28">
-            <FaqLogoCard />
+            <div className="overflow-hidden rounded-card-lg border border-champagne/15 shadow-soft">
+              <div className="relative aspect-[4/3] w-full">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/Clinic.jpg.jpeg"
+                  alt="Inside a Bright & Shine Teeth Whitening treatment room, with a whitening chair, LED lamp, and branded décor"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
