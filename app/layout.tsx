@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LogoIntro } from "@/components/layout/LogoIntro";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { MobileTextBar } from "@/components/ui/MobileTextBar";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
           <Footer />
           <BookingModal />
           <WhatsAppButton />
+          <MobileTextBar />
         </BookingProvider>
       </body>
     </html>

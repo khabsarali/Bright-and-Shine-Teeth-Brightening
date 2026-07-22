@@ -105,6 +105,24 @@
   }
 }
 
+/*
+ * Mobile-only "TEXT US" sticky bar. Visible at ≤768px, hidden on tablet and
+ * desktop (≥769px). Reserve matching space at the bottom of the page on mobile
+ * so the fixed bar never covers page content.
+ */
+.mobile-text-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-text-bar {
+    display: flex;
+  }
+  body {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom));
+  }
+}
+
 /* Respect reduced motion globally */
 @media (prefers-reduced-motion: reduce) {
   *,
