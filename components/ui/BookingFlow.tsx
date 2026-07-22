@@ -3,17 +3,10 @@
 import { Check, MapPin, CalendarDays, Clock } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { treatments } from "@/data/treatments";
-import { locations, getLocation } from "@/data/locations";
+import { locations, getLocation, getAvailableDates } from "@/data/locations";
 import { Button } from "./Button";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const DAYS_AHEAD = 30;
-
-interface AvailableDate {
-  iso: string;
-  label: string;
-  slots: string[];
-}
 
 interface BookingFlowProps {
   initialTreatment?: string;
@@ -22,15 +15,11 @@ interface BookingFlowProps {
   onDone?: () => void;
 }
 
-const toISO = (d: Date) =>
-  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
-    d.getDate(),
-  ).padStart(2, "0")}`;
-
 /**
- * Reusable, location-aware booking flow used both inside the booking modal
- * and on the /book-appointment page. Availability comes from the editable
- * SAMPLE config in data/locations.ts — it is not live, real-time data.
+ * Reusable, location-aware booking flow used in the booking modal, on the
+ * /book-appointment page, and on the contact page. Each location's bookable
+ * days and times come from the config in data/locations.ts, so only valid
+ * dates/times for the chosen clinic are ever offered.
  */
 export function BookingFlow({
   initialTreatment,
@@ -56,29 +45,12 @@ export function BookingFlow({
   const location = getLocation(locationId);
   const treatmentData = treatments.find((t) => t.name === treatment);
 
-  // Upcoming bookable dates for the selected location, derived from the
-  // location's weekday availability template.
-  const availableDates = useMemo<AvailableDate[]>(() => {
-    if (!today || !location) return [];
-    const out: AvailableDate[] = [];
-    for (let i = 0; i < DAYS_AHEAD; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      const slots = location.availability[d.getDay()];
-      if (slots && slots.length) {
-        out.push({
-          iso: toISO(d),
-          label: d.toLocaleDateString("en-CA", {
-            weekday: "short",
-            month: "short",
-            day: "numeric",
-          }),
-          slots,
-        });
-      }
-    }
-    return out;
-  }, [today, location]);
+  // Upcoming bookable dates for the selected location, honouring its weekday
+  // hours and availability start date (see data/locations.ts).
+  const availableDates = useMemo(
+    () => (today && location ? getAvailableDates(location, today) : []),
+    [today, location],
+  );
 
   const availableTimes = useMemo(
     () => availableDates.find((d) => d.iso === dateISO)?.slots ?? [],
@@ -137,8 +109,8 @@ export function BookingFlow({
         </dl>
 
         <p className="mx-auto mt-4 max-w-sm text-xs leading-relaxed text-medium-gray">
-          Times shown are sample availability, not a confirmed real-time
-          booking — we&apos;ll confirm your exact slot when we reach out.
+          This is a request based on the clinic&apos;s opening hours. We&apos;ll
+          reach out to confirm your appointment.
         </p>
 
         {onDone && (
@@ -284,8 +256,8 @@ export function BookingFlow({
               </div>
             )}
             <p className="text-xs leading-relaxed text-medium-gray">
-              Sample availability shown — we&apos;ll confirm your exact slot when
-              we contact you.
+              Only this location&apos;s open days and times are shown. We&apos;ll
+              confirm your exact slot when we contact you.
             </p>
           </div>
         )}

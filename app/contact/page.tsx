@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Phone, Mail, Clock } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
-import { ContactForm } from "@/components/ui/ContactForm";
+import { BookingFlow } from "@/components/ui/BookingFlow";
 import { Reveal } from "@/components/ui/Reveal";
 import { business, isProvided, phoneHref, emailHref } from "@/data/business";
 import { locations } from "@/data/locations";
@@ -104,7 +104,16 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <ContactForm />
+            <div className="rounded-card border border-soft-gray bg-white p-8 shadow-soft lg:p-10">
+              <h2 className="font-serif text-2xl font-medium text-black-pure">
+                Book an Appointment
+              </h2>
+              <p className="mb-6 mt-2 text-sm leading-relaxed text-medium-gray">
+                Choose a clinic location, then pick from the days and times that
+                location is open.
+              </p>
+              <BookingFlow />
+            </div>
           </Reveal>
         </div>
       </section>
