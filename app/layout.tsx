@@ -6,6 +6,7 @@ import { BookingModal } from "@/components/ui/BookingModal";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LogoIntro } from "@/components/layout/LogoIntro";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <BookingModal />
+          <WhatsAppButton />
         </BookingProvider>
       </body>
     </html>

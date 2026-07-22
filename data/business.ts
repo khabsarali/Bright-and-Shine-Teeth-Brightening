@@ -11,6 +11,9 @@ export const business = {
   phone: "ADD_BUSINESS_PHONE",
   email: "ADD_BUSINESS_EMAIL",
   businessHours: "ADD_BUSINESS_HOURS",
+  // WhatsApp number in international format, digits only (e.g. "15875551234").
+  // The floating WhatsApp button appears once this is set.
+  whatsapp: "ADD_WHATSAPP_NUMBER",
   socials: {
     instagram: "",
     facebook: "",
@@ -33,3 +36,9 @@ export const phoneHref = () =>
 /** Build a mailto: href from the configured email, or undefined if unset. */
 export const emailHref = () =>
   isProvided(business.email) ? `mailto:${business.email}` : undefined;
+
+/** Build a wa.me href from the configured WhatsApp number, or undefined. */
+export const whatsappHref = () =>
+  isProvided(business.whatsapp)
+    ? `https://wa.me/${business.whatsapp.replace(/[^\d]/g, "")}`
+    : undefined;

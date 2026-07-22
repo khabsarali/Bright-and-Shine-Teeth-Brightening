@@ -47,13 +47,13 @@ export function Header() {
             aria-label="Bright and Shine Teeth Whitening — home"
             className="btn-focus inline-flex rounded-2xl"
           >
-            {/* Official header lockup (black background, silver/gold artwork).
-                Used as-is — never inverted — so the gold ampersand is kept. */}
+            {/* Transparent logo — black on the light homepage header, whitened
+                only over the dark interior-page header so it stays visible. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/header%20logo.png"
+              src="/images/white-logo.png"
               alt="Bright and Shine Teeth Whitening"
-              className="header-logo"
+              className={`header-logo${light ? "" : " header-logo--invert"}`}
             />
           </Link>
 
