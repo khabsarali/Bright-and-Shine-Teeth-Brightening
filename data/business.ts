@@ -11,14 +11,17 @@ export const business = {
   phone: "ADD_BUSINESS_PHONE",
   email: "ADD_BUSINESS_EMAIL",
   businessHours: "ADD_BUSINESS_HOURS",
-  // WhatsApp number in international format, digits only (e.g. "15875551234").
+  // WhatsApp number in international format, digits only.
   // The floating WhatsApp button appears once this is set.
-  whatsapp: "ADD_WHATSAPP_NUMBER",
+  whatsapp: "17806160398",
   socials: {
-    instagram: "",
-    facebook: "",
-    tiktok: "",
-    google: "",
+    instagram:
+      "https://www.instagram.com/bright_n_shine_teeth_whitening?igsh=MXR5NHB3bTE1bWxzeg%3D%3D&utm_source=qr",
+    tiktok: "https://www.tiktok.com/@bnsteethwhitening?_r=1&_t=ZS-98CXfA4ZKjo",
+    facebook:
+      "https://www.facebook.com/profile.php?id=100088371202847&mibextid=wwXIfr&rdid=O1tUUsAceOebtPro&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1Bdg6KdPwL%2F%3Fmibextid%3DwwXIfr",
+    pinterest: "https://pin.it/1sA75Ytet",
+    google: "https://share.google/jM8xeusrhNpDLCzVQ",
   } as Record<string, string>,
 };
 

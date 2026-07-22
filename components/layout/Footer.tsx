@@ -1,26 +1,18 @@
 import Link from "next/link";
-import {
-  Instagram,
-  Facebook,
-  Music2,
-  Chrome,
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
 import { BookingButton } from "@/components/ui/BookingButton";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 import { navLinks } from "@/data/navigation";
 import { locations } from "@/data/locations";
 import { business, isProvided, phoneHref, emailHref } from "@/data/business";
 
-const socialIcons: Record<string, LucideIcon> = {
-  instagram: Instagram,
-  facebook: Facebook,
-  tiktok: Music2,
-  google: Chrome,
+const SOCIAL_LABELS: Record<string, string> = {
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  facebook: "Facebook",
+  pinterest: "Pinterest",
+  google: "Google",
 };
 
 export function Footer() {
@@ -59,23 +51,20 @@ export function Footer() {
             </p>
 
             {socials.length > 0 && (
-              <ul className="mt-6 flex items-center gap-3">
-                {socials.map(([key, href]) => {
-                  const Icon = socialIcons[key] ?? Chrome;
-                  return (
-                    <li key={key}>
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={key}
-                        className="btn-focus flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-champagne hover:text-champagne-light"
-                      >
-                        <Icon size={16} aria-hidden="true" />
-                      </a>
-                    </li>
-                  );
-                })}
+              <ul className="mt-6 flex flex-wrap items-center gap-3">
+                {socials.map(([key, href]) => (
+                  <li key={key}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={SOCIAL_LABELS[key] ?? key}
+                      className="btn-focus flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-champagne hover:text-champagne-light"
+                    >
+                      <SocialIcon name={key} className="h-4 w-4" />
+                    </a>
+                  </li>
+                ))}
               </ul>
             )}
 
