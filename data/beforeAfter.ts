@@ -15,6 +15,10 @@ export const beforeAfterResults: BeforeAfter[] = [
     alt: "Client teeth before whitening (top) and noticeably brighter after treatment (bottom)",
   },
   {
+    src: "/Teeths%20after/after2.jpeg",
+    alt: "Close-up of teeth before whitening (top) and whiter after treatment (bottom)",
+  },
+  {
     src: "/Teeths%20after/after3.jpeg",
     alt: "Client smile before whitening (top) and a brighter result after treatment (bottom)",
   },
@@ -25,9 +29,5 @@ export const beforeAfterResults: BeforeAfter[] = [
   {
     src: "/Teeths%20after/after5.jpeg",
     alt: "Client teeth before whitening (top) and whiter after treatment (bottom)",
-  },
-  {
-    src: "/Teeths%20after/after6.jpeg",
-    alt: "Smile before whitening (top) and a brighter, whiter smile after treatment (bottom)",
   },
 ];
