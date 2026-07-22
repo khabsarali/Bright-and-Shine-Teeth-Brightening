@@ -183,19 +183,16 @@
  * so it stays prominent without forcing a tall header. Aspect ratio, and the
  * transparent background, are preserved.
  */
-/* Header logo — transparent lockup shown directly (no background box).
-   Black on the light homepage header; whitened only over the dark interior
-   page header via the --invert modifier. */
+/* Header logo — the official horizontal lockup on its black background, used
+   as-is. Slightly rounded so the black tile reads as a deliberate logo chip
+   on the light homepage header and blends on the dark interior headers. */
 .header-logo {
   display: block;
-  height: 56px;
+  height: 64px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
-}
-
-.header-logo--invert {
-  filter: brightness(0) invert(1);
+  border-radius: 10px;
 }
 
 /* Hero logo — transparent lockup shown directly on the cream hero.

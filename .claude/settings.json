@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(git rev-list *)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = New-Object System.Drawing.Bitmap\\(\"D:\\\\GitHub Projects\\\\Bright-and-Shine-Teeth-Brightening\\\\public\\\\images\\\\header logo.png\"\\); Write-Output \"Size: $\\($img.Width\\)x$\\($img.Height\\)  Format: $\\($img.PixelFormat\\)\"; $corner = $img.GetPixel\\(2,2\\); Write-Output \\(\"corner A={0} R={1} G={2} B={3}\" -f $corner.A,$corner.R,$corner.G,$corner.B\\); $center = $img.GetPixel\\([int]\\($img.Width/2\\),[int]\\($img.Height/2\\)\\); Write-Output \\(\"center A={0} R={1} G={2} B={3}\" -f $center.A,$center.R,$center.G,$center.B\\); $img.Dispose\\(\\))"
     ]
   }
 }
